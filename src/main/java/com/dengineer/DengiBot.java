@@ -12,6 +12,7 @@ public class DengiBot {
 
         JDA dengi = JDABuilder.createDefault("")
                 .setActivity(Activity.playing("Baseball"))
+                .addEventListeners(new centerCom())
                 .build();
     }
 };
