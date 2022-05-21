@@ -19,10 +19,12 @@ public class Help extends ListenerAdapter {
         eb.setDescription("Full Command Center and Guide for DengiBot!");
         eb.setAuthor("Dengibot", "https://dengineer.vercel.app", "https://dengineer.vercel.app/favicon.png");
         eb.setThumbnail("https://dengineer.vercel.app/favicon.png");
-        sb = sb.append("\t>> !help  ->  Brings up this menu. Used to see all commands.\n");
-        sb = sb.append("\t>> !todo  ->  Brings up to-do list, for the user.\n");
-        sb = sb.append("\t>> !shoe  ->  Stay on top of new sneaker relesases.\n");
+        sb = sb.append(">!help:\n\n  Brings up this menu. Used to see all commands.\n\n");
+        sb = sb.append(">!todo:\n\n  Brings up to-do list, for the user.\n\n");
+        sb = sb.append(">!shoe:\n\n Stay on top of new sneaker relesases.\n\n");
         eb.addField("Commands:", sb.toString(), false);
+        eb.addField("Help", "Brings up this menu. Used to see all commands", true).addBlankField(true);
+        eb.setFooter("Visit: [links](Https://dengineer.vercel.app)");
         
 
         MessageChannel channel = event.getChannel();
