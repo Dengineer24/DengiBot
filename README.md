@@ -31,3 +31,7 @@ Then, in the terminal shell where you are attempting to run your bot from run:
 export DISC_Token="" (no "")
 ```
 and then directly after, staying in the same shell, your bot should be up and running.
+
+### For windows
+
+Directly add DISC_Token diraectly as an env variable in control panel
