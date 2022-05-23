@@ -10,13 +10,18 @@ import javax.security.auth.login.LoginException;
 public class DengiBot {
 
     public static void main(String[] args) throws LoginException, InterruptedException {
-        JDA jda = JDABuilder.createDefault(System.getenv("DISC_Token"))
-            .setActivity(Activity.listening("Best Friend - Young Thug"))
-            .addEventListeners(new StartUp())
-            .addEventListeners(new MessageListener())
-            .build();
+        try {
+            JDA jda = JDABuilder.createDefault(System.getenv("DISC_Token"))
+                .setActivity(Activity.listening("Best Friend - Young Thug"))
+                .addEventListeners(new StartUp())
+                .addEventListeners(new MessageListener())
+                .build();
 
-        // optionally block until JDA is ready
-        jda.awaitReady();
+            // optionally block until JDA is ready
+            jda.awaitReady();
+        } 
+        catch (Exception e ) {
+           e.printStackTrace();
+        }
     }
 }

@@ -10,7 +10,7 @@ public class StartUp implements EventListener {
     public void onEvent(GenericEvent event)
     {
         if (event instanceof ReadyEvent) {
-            System.out.println("API is ready!");
+            System.out.println("API is ready!\n");
         }
     }
 }
