@@ -34,4 +34,4 @@ and then directly after, staying in the same shell, your bot should be up and ru
 
 ### For windows
 
-Directly add DISC_Token diraectly as an env variable in control panel
+Directly add DISC_Token directly as an env variable in control panel
