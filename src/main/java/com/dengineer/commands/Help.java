@@ -25,8 +25,8 @@ public class Help extends ListenerAdapter {
         eb.setAuthor("Dengibot", "https://dengineer.vercel.app", "https://dengineer.vercel.app/favicon.png");
         eb.setThumbnail("https://dengineer.vercel.app/favicon.png");
         eb.addField("Commands:", sb.toString(), false);
-        eb.addField("!Help", "`Brings up this menu. Used to see all commands`", true).addBlankField(true);
-        eb.addField("!todo", "`Gives today's to-do list`", false);
+        eb.addField("!help", "`Brings up this menu. Used to see all commands`", true).addBlankField(true);
+        eb.addField("!calender", "`Gives today's to-do list`", false);
         eb.addField("!shoe", "`Gives shoe drop information for the coming days`", false);
         MessageChannel channel = event.getChannel();
         channel.sendMessageEmbeds(eb.build()).queue();

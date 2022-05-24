@@ -5,17 +5,21 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.HashMap;
+
+import com.dengineer.commands.MyCalendar;
 import com.dengineer.commands.Help;
 import com.dengineer.commands.Shoe;
-import com.dengineer.commands.ToDoList;
+import com.dengineer.*;
 
 
 public class MessageListener extends ListenerAdapter{
-    
+    HashMap<String, String> map = new HashMap<>();
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
         try {
+
             Message msg = event.getMessage();
             if (msg.getContentRaw().equals("!help"))
             {
@@ -23,9 +27,9 @@ public class MessageListener extends ListenerAdapter{
                 help.onMessageReceived(event);
             }
 
-            if (msg.getContentRaw().equals("!todo")) {
-                ToDoList ToDoList = new ToDoList();
-                ToDoList.onMessageReceived(event);
+            if (msg.getContentRaw().equals("!calender")) {
+                MyCalendar calendar = new MyCalendar();
+                calendar.onMessageReceived(event);
             }
 
             if (msg.getContentRaw().equals("!shoe")) {
@@ -41,6 +45,10 @@ public class MessageListener extends ListenerAdapter{
 
         } catch (Exception e) {
             e.printStackTrace();
+<<<<<<< Updated upstream
         }
+=======
+         }
+>>>>>>> Stashed changes
     }
 }

@@ -1,9 +1,7 @@
 package com.dengineer.commands;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import javax.swing.plaf.ColorUIResource;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -21,10 +19,12 @@ public class Shoe extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+
         MessageChannel channel = event.getChannel();
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(new ColorUIResource(90, 70, 155));
         final String url = "https://www.nike.com/launch?s=upcoming";
+
         try {
 
             Document doc = Jsoup.connect(url).get();
@@ -37,8 +37,8 @@ public class Shoe extends ListenerAdapter {
             else {
                 eb.setDescription("Unsuccessful connection with " + response.url() + " code: " + response.statusCode());
             }
+
             Elements media = doc.select("figure.d-md-h.ncss-col-sm-12.va-sm-t.pb0-sm.prl0-sm");
-            
             for (Element headlines : media) {
                 
                 final String headLink = headlines.select("a.ncss-col-sm-8.launch-details.u-full-height.va-sm-t.full").attr("href");
@@ -46,7 +46,7 @@ public class Shoe extends ListenerAdapter {
                     break;
                 }
                 else {
-                    final String shoes = headlines.select("a.ncss-col-sm-8.launch-details.u-full-height.va-sm-t.full").text();
+                    final String shoes = headlines.select("a.ncss-col-sm-8.launch-details.u-full-height.va-sm-t.full").text().replaceAll("2:00 PM", "10:00 AM EST");
                     final String fullLink = "https://www.nike.com" + headLink;
                     tempHashMap.put(shoes, fullLink);
                 }
@@ -65,7 +65,7 @@ public class Shoe extends ListenerAdapter {
                 System.out.println(e.toString());
             }
         } 
-        catch (Exception e ) {
+        catch (Exception e) {
             eb.addField("Issue", e.toString(), false);
             channel.sendMessageEmbeds(eb.build()).queue();
         }
