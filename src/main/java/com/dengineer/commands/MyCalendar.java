@@ -90,7 +90,7 @@ public class MyCalendar extends ListenerAdapter{
 
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
-            Events events = service.events().list("t6jl5hmusftrljnmni6fp6e6ds@group.calendar.google.com")
+            Events events = service.events().list("")
                     .setMaxResults(10)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
