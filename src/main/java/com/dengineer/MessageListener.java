@@ -27,7 +27,7 @@ public class MessageListener extends ListenerAdapter{
                 help.onMessageReceived(event);
             }
 
-            if (msg.getContentRaw().equals("!calender")) {
+            if (msg.getContentRaw().equals("!calendar")) {
                 MyCalendar calendar = new MyCalendar();
                 calendar.onMessageReceived(event);
             }
@@ -37,7 +37,7 @@ public class MessageListener extends ListenerAdapter{
                 shoe.onMessageReceived(event);
             }
 
-            if (msg.getContentRaw().startsWith("!") && (!(msg.getContentRaw().equals("!help") || (msg.getContentRaw().equals("!todo") || (msg.getContentRaw().equals("!shoe")))))) {
+            if (msg.getContentRaw().startsWith("!") && (!(msg.getContentRaw().equals("!help") || (msg.getContentRaw().equals("!todo") || (msg.getContentRaw().equals("!calendar")))))) {
                 MessageChannel channel = event.getChannel();
                 channel.sendMessage("Invalid Command").queue();
             }

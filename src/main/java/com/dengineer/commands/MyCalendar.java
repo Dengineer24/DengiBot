@@ -1,5 +1,6 @@
 package com.dengineer.commands;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -30,6 +31,8 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
+
+import javax.swing.plaf.ColorUIResource;
 
 /* class to demonstarte use of Calendar events list API */
 public class MyCalendar extends ListenerAdapter{
@@ -72,33 +75,43 @@ public class MyCalendar extends ListenerAdapter{
         return credential;
     }
 
-    public static void main(String... args) throws IOException, GeneralSecurityException {
-        // Build a new authorized API client service.
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                .setApplicationName(APPLICATION_NAME)
-                .build();
+    @Override
+    public void onMessageReceived(MessageReceivedEvent DiscEvent) {
 
-        // List the next 10 events from the primary calendar.
-        DateTime now = new DateTime(System.currentTimeMillis());
-        Events events = service.events().list("primary")
-                .setMaxResults(10)
-                .setTimeMin(now)
-                .setOrderBy("startTime")
-                .setSingleEvents(true)
-                .execute();
-        List<Event> items = events.getItems();
-        if (items.isEmpty()) {
-            System.out.println("No upcoming events found.");
-        } else {
-            System.out.println("Upcoming events");
-            for (Event event : items) {
-                DateTime start = event.getStart().getDateTime();
-                if (start == null) {
-                    start = event.getStart().getDate();
+        MessageChannel channel = DiscEvent.getChannel();
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setColor(new ColorUIResource(90, 70, 155));
+        
+        try {
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            Calendar service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+
+            // List the next 10 events from the primary calendar.
+            DateTime now = new DateTime(System.currentTimeMillis());
+            Events events = service.events().list("t6jl5hmusftrljnmni6fp6e6ds@group.calendar.google.com")
+                    .setMaxResults(10)
+                    .setTimeMin(now)
+                    .setOrderBy("startTime")
+                    .setSingleEvents(true)
+                    .execute();
+            List<Event> items = events.getItems();
+            if (items.isEmpty()) {
+                System.out.println("No upcoming events found.");
+            } else {
+                System.out.println("Upcoming events");
+                for (Event event : items) {
+                    DateTime start = event.getStart().getDateTime();
+                    if (start == null) {
+                        start = event.getStart().getDate();
+                    }
+                    eb.addField(event.getSummary(), start.toString(), false);
                 }
-                System.out.printf("%s (%s)\n", event.getSummary(), start);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        channel.sendMessageEmbeds(eb.build()).queue();
     }
 }
