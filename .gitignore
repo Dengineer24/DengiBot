@@ -3,3 +3,5 @@
 *.class
 target/classes/com/dengineer/DengiBot.class
 target/classes/com/dengineer/DengiBot.class
+*.json
+tokens/StoredCredential

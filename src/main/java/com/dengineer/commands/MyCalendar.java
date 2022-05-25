@@ -45,8 +45,7 @@ public class MyCalendar extends ListenerAdapter{
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-
+    private static final String CREDENTIALS_FILE_PATH = "./credentials.json";
     /**
      * Creates an authorized Credential object.
      * @param HTTP_TRANSPORT The network HTTP Transport.
