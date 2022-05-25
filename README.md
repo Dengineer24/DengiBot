@@ -1,5 +1,6 @@
 # DengiBot
-A discord personal Assistance bot
+A discord personal Assistance bot, that completes everyday tasks that I have to do in fast, simple, optimized way.
+So far, has !shoe, which can scrape the available nike shoes upcoming, and !calendar which utilizes Google Calendar API, and will allow for easy editing and information on what tasks need to be done
 
 # To set up Discord Token in ENV 
 
