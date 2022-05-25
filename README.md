@@ -1,6 +1,6 @@
 # DengiBot
 A discord personal Assistance bot, that completes everyday tasks that I have to do in fast, simple, optimized way.
-So far, has !shoe, which can scrape the available nike shoes upcoming, and !calendar which utilizes Google Calendar API, and will allow for easy editing and information on what tasks need to be done
+So far, has !shoe, which can scrape the available nike shoes upcoming, and !calendar which utilizes Google Calendar API, and will allow for easy editing and information on what tasks need to be done. Set up for bot is given below.
 
 # To set up Discord Token in ENV 
 
@@ -36,3 +36,14 @@ and then directly after, staying in the same shell, your bot should be up and ru
 ### For windows
 
 Directly add DISC_Token directly as an env variable in control panel
+
+# Google Calander Connection 
+
+First in google calander create a new calander and find the calander ID for it, then follow the quickstart guide Java Google Calendar API.
+```
+add credentials.json to commands folder
+```
+then to input add your new Calander ID to 
+```Java
+Events events = service.events().list("add calander ID here"); (line 93)
+```
