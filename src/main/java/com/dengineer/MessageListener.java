@@ -10,6 +10,7 @@ import java.util.HashMap;
 import com.dengineer.commands.MyCalendar;
 import com.dengineer.commands.Help;
 import com.dengineer.commands.Shoe;
+import com.google.api.services.calendar.Calendar;
 import com.dengineer.*;
 
 
@@ -41,7 +42,6 @@ public class MessageListener extends ListenerAdapter{
                 MessageChannel channel = event.getChannel();
                 channel.sendMessage("Invalid Command").queue();
             }
-            
 
         } catch (Exception e) {
             e.printStackTrace();

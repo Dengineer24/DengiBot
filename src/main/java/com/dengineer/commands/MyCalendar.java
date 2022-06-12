@@ -1,12 +1,9 @@
 package com.dengineer.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.ChannelType;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.Response;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -28,7 +25,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
@@ -77,10 +78,11 @@ public class MyCalendar extends ListenerAdapter{
 
     @Override
     public void onMessageReceived(MessageReceivedEvent DiscEvent) {
-
         MessageChannel channel = DiscEvent.getChannel();
+        
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(new ColorUIResource(90, 70, 155));
+        eb.setDescription("Upcoming events");
         
         try {
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -88,25 +90,24 @@ public class MyCalendar extends ListenerAdapter{
                     .setApplicationName(APPLICATION_NAME)
                     .build();
 
-            // List the next 10 events from the primary calendar.
+            // List next 25 Google Calendar tasks
             DateTime now = new DateTime(System.currentTimeMillis());
-            Events events = service.events().list("")
-                    .setMaxResults(10)
+            Events events = service.events().list(System.getenv("GC_Token"))
+                    .setMaxResults(25)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
                     .execute();
             List<Event> items = events.getItems();
             if (items.isEmpty()) {
-                System.out.println("No upcoming events found.");
+                eb.addField("N/A", "No upcoming events found.", false);
             } else {
-                System.out.println("Upcoming events");
                 for (Event event : items) {
                     DateTime start = event.getStart().getDateTime();
                     if (start == null) {
                         start = event.getStart().getDate();
                     }
-                    eb.addField(event.getSummary(), start.toString(), false);
+                     eb.addField(event.getSummary() + " ", start.toString(), false);
                 }
             }
         } catch (Exception e) {
