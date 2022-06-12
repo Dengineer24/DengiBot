@@ -12,7 +12,7 @@ public class DengiBot {
     public static void main(String[] args) throws LoginException, InterruptedException {
         try {
             JDA jda = JDABuilder.createDefault(System.getenv("DISC_Token"))
-                .setActivity(Activity.listening("Best Friend - Young Thug"))
+                .setActivity(Activity.listening("Flashing Lights - Kanye West, Dwele"))
                 .addEventListeners(new StartUp())
                 .addEventListeners(new MessageListener())
                 .build();
